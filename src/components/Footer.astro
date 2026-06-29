@@ -17,19 +17,19 @@ const navItems = [
 ---
 
 <footer class="bg-surface-2 border-t border-line">
-  <div class="container-x py-12 lg:py-16">
+  <div class="container-x py-10 lg:py-12">
 
     <!-- ── Main grid ──────────────────────────────────────────────── -->
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
       <!-- Col 1: Brand & CTA -->
       <div class="flex flex-col gap-4">
         <a
           href="/"
-          class="flex items-center gap-1.5 font-display font-semibold text-lg text-ink hover:text-primary-text transition w-fit"
+          class="flex items-center gap-1.5 font-display font-semibold text-base text-ink hover:text-primary-text transition-colors w-fit"
           aria-label={site.businessName}
         >
-          <Icon name="tabler:bolt" class="size-5 text-primary" aria-hidden="true" />
+          <Icon name="tabler:bolt" class="size-4.5 text-primary" aria-hidden="true" />
           <span>{wordmark}</span>
         </a>
         <p class="text-muted text-sm leading-relaxed">{site.tagline}</p>
@@ -49,7 +49,7 @@ const navItems = [
                 href={s.href}
                 target="_blank"
                 rel="noopener"
-                class="text-muted hover:text-primary-text text-sm transition"
+                class="text-muted hover:text-primary-text text-sm transition-colors"
               >
                 {s.label}
               </a>
@@ -67,7 +67,7 @@ const navItems = [
           {navItems.map((item) => (
             <a
               href={item.href}
-              class="text-muted hover:text-primary-text text-sm transition flex items-center gap-1.5"
+              class="text-muted hover:text-primary-text text-sm transition-colors flex items-center gap-1.5"
             >
               <Icon name="tabler:chevron-right" class="size-3.5" aria-hidden="true" />
               {item.label}
@@ -114,7 +114,7 @@ const navItems = [
             <Icon name="tabler:phone" class="size-4 text-primary shrink-0" aria-hidden="true" />
             <a
               href={`tel:${site.phone}`}
-              class="hover:text-primary-text transition"
+              class="hover:text-primary-text transition-colors"
             >
               {site.phoneDisplay}
             </a>

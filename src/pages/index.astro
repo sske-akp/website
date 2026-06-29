@@ -52,7 +52,12 @@ const segments: Segment[] = [
   },
 ];
 
-const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised dealer & distributor'];
+const trustItems = [
+  { label: 'Established', value: '1998' },
+  { label: 'Experience', value: '25+ years' },
+  { label: 'Showroom', value: '3 floors' },
+  { label: 'Business', value: 'Dealer & distributor' },
+];
 ---
 
 <BaseLayout
@@ -60,68 +65,50 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
 >
 
   <!-- ─── 1. HERO ──────────────────────────────────────────────────────────── -->
-  <!-- TODO: replace CSS hero backdrop with a real showroom photo or short muted loop when available -->
-  <Section id="hero" bleed class="relative overflow-hidden">
-
-    <!-- Layered CSS backdrop: gradient + dot grid + radial glow -->
-    <div
-      class="absolute inset-0"
-      style="background: linear-gradient(140deg, color-mix(in oklab, var(--c-primary) 14%, var(--c-canvas)) 0%, var(--c-canvas) 55%, color-mix(in oklab, var(--c-accent) 7%, var(--c-canvas)) 100%)"
-      aria-hidden="true"
-    ></div>
-    <div
-      class="absolute inset-0 opacity-40"
-      style="background-image: radial-gradient(circle, var(--c-line) 1px, transparent 1px); background-size: 22px 22px"
-      aria-hidden="true"
-    ></div>
-    <div
-      class="absolute inset-0"
-      style="background: radial-gradient(ellipse 55% 65% at 5% 65%, color-mix(in oklab, var(--c-primary) 16%, transparent) 0%, transparent 60%)"
-      aria-hidden="true"
-    ></div>
-
+  <Section id="hero" bleed class="bg-surface border-b border-line">
     <Container>
-      <div class="relative z-10 flex flex-col gap-6 max-w-3xl py-6 sm:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center py-8 sm:py-12">
+        <div class="lg:col-span-7 flex flex-col gap-5">
 
-        <!-- Eyebrow -->
-        <span class="text-xs font-semibold uppercase tracking-widest text-primary-text">
-          Anakapalli · Since 1998
-        </span>
+          <!-- Eyebrow -->
+          <span class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            Electrical dealer in Anakapalli · Since 1998
+          </span>
 
-        <!-- H1 — only h1 on the page -->
-        <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink leading-tight">
-          Powering homes, farms&nbsp;&amp;&nbsp;industry —&nbsp;for&nbsp;25+&nbsp;years.
-        </h1>
+          <!-- H1 — only h1 on the page -->
+          <h1 class="font-display font-semibold text-3xl sm:text-4xl lg:text-[2.625rem] text-ink leading-tight max-w-3xl">
+            Electrical products, brands and local advice under one roof.
+          </h1>
 
-        <!-- Subhead -->
-        <p class="text-muted text-lg sm:text-xl max-w-xl leading-relaxed">
-          Your authorised electrical dealer in Anakapalli, serving homes, farms, and businesses across Visakhapatnam district.
-        </p>
+          <!-- Subhead -->
+          <p class="text-muted text-base sm:text-lg max-w-2xl leading-relaxed">
+            Sri Sai Krishna Enterprises is a family-run showroom in Anakapalli carrying pumps, cables, switchgear, fans, wiring accessories and lighting.
+          </p>
 
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-3">
-          <EnquireButton
-            context="I'd like to enquire about your products"
-            label="Chat on WhatsApp"
-            size="lg"
-          />
-          <Button href={`tel:${site.phone}`} variant="outline" size="lg">
-            <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
-            Call the showroom
-          </Button>
-          <Button href="/visit-us" variant="ghost" size="lg">
-            Visit our showroom
-          </Button>
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-3">
+            <EnquireButton
+              context="I'd like to enquire about your products"
+              label="WhatsApp enquiry"
+              size="lg"
+            />
+            <Button href={`tel:${site.phone}`} variant="outline" size="lg">
+              <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
+              Call showroom
+            </Button>
+          </div>
         </div>
 
-        <!-- Trust row -->
-        <div class="flex flex-wrap gap-x-5 gap-y-2">
-          {trustItems.map((item) => (
-            <div class="flex items-center gap-1.5 text-sm text-muted">
-              <Icon name="tabler:check" class="size-4 text-primary-text shrink-0" aria-hidden="true" />
-              <span>{item}</span>
-            </div>
-          ))}
+        <!-- Trust facts -->
+        <div class="lg:col-span-5 bg-canvas border border-line rounded-lg p-5 sm:p-6">
+          <dl class="grid grid-cols-2 gap-x-5 gap-y-5">
+            {trustItems.map((item) => (
+              <div class="border-l border-line pl-3">
+                <dt class="text-xs uppercase tracking-[0.12em] text-muted">{item.label}</dt>
+                <dd class="mt-1 font-display font-semibold text-ink leading-snug">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
       </div>
@@ -133,11 +120,11 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
   <Section>
     <Reveal>
       <div class="max-w-3xl mx-auto text-center">
-        <p class="font-display font-semibold text-3xl sm:text-4xl lg:text-5xl text-ink leading-tight">
-          The electrical partner that Anakapalli has trusted since 1998.
+        <p class="font-display font-semibold text-2xl sm:text-3xl text-ink leading-tight">
+          A practical, local showroom for dependable electrical supply.
         </p>
-        <p class="mt-6 text-muted text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
-          From wiring a new home and running a farm pump to supplying an industrial project — we bring quality brands, honest advice, and 25 years of field knowledge to every customer.
+        <p class="mt-5 text-muted text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          From wiring a home and replacing a pump to sourcing switchgear for a project, customers come to SSKE for known brands, clear guidance and local availability.
         </p>
       </div>
     </Reveal>
@@ -152,41 +139,41 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
       intro="Three distinct customer types. One trusted source. Stocked and ready in Anakapalli."
       align="center"
     />
-    <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-4">
       {segments.map((seg, i) => (
         <Reveal delay={i * 110}>
           <a
             href={seg.href}
             class:list={[
-              'group flex flex-col gap-5 p-6 sm:p-8 rounded-2xl border transition hover:-translate-y-1 hover:shadow-lg h-full',
+              'group flex flex-col gap-4 p-5 rounded-lg border transition-colors h-full',
               seg.highlight
-                ? 'bg-surface border-primary/30 hover:border-primary'
+                ? 'bg-surface border-primary/40 hover:border-primary'
                 : 'bg-surface border-line hover:border-primary/40',
             ]}
           >
             <div
               class:list={[
-                'w-14 h-14 rounded-2xl flex items-center justify-center shrink-0',
+                'w-10 h-10 rounded-md flex items-center justify-center shrink-0',
                 seg.highlight
                   ? 'bg-primary/15 text-primary-text'
                   : 'bg-surface-2 text-muted',
               ]}
             >
-              <Icon name={`tabler:${seg.icon}`} class="size-7" aria-hidden="true" />
+              <Icon name={`tabler:${seg.icon}`} class="size-5" aria-hidden="true" />
             </div>
 
             {seg.highlight && (
-              <span class="text-xs font-semibold uppercase tracking-widest text-primary-text -mb-2">
+              <span class="text-xs font-semibold uppercase tracking-[0.14em] text-muted -mb-2">
                 Growing focus
               </span>
             )}
 
             <div class="flex flex-col gap-2 flex-1">
-              <h2 class="font-display font-semibold text-xl text-ink">{seg.heading}</h2>
+              <h2 class="font-display font-semibold text-lg text-ink">{seg.heading}</h2>
               <p class="text-muted text-sm leading-relaxed">{seg.body}</p>
             </div>
 
-            <div class="flex items-center gap-1.5 text-sm font-medium text-primary-text mt-auto transition-all group-hover:gap-2.5">
+            <div class="flex items-center gap-1.5 text-sm font-medium text-primary-text mt-auto">
               Explore
               <Icon name="tabler:arrow-right" class="size-4" aria-hidden="true" />
             </div>
@@ -205,14 +192,14 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
       intro="From a pump for your field to switchgear for your factory — stocked and ready in Anakapalli."
       align="center"
     />
-    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {featuredCategories.map((cat, i) => (
         <Reveal delay={i * 75}>
           <CategoryCard category={cat} />
         </Reveal>
       ))}
     </div>
-    <div class="mt-10 text-center">
+    <div class="mt-8 text-center">
       <Button href="/what-we-serve" variant="outline" size="lg">
         See everything we stock →
       </Button>
@@ -228,10 +215,10 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
       intro="Every brand on our shelves is an authorised partnership — quality you can count on."
       align="center"
     />
-    <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
       {brands.map((brand, i) => (
         <Reveal delay={i * 60}>
-          <div class="bg-surface border border-line rounded-xl px-5 py-5 font-display font-bold text-xl sm:text-2xl text-ink text-center transition hover:-translate-y-1 hover:shadow-md hover:border-primary/40 cursor-default select-none">
+          <div class="bg-surface border border-line rounded-lg px-4 py-4 font-display font-semibold text-lg sm:text-xl text-ink text-center transition-colors hover:border-primary/40 cursor-default select-none">
             {brand.name}
           </div>
         </Reveal>
@@ -247,7 +234,7 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
 
   <!-- ─── 6. STORY TEASER ──────────────────────────────────────────────────── -->
   <Section id="our-story" class="bg-surface">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
       <!-- Photo placeholder — left on desktop -->
       <Reveal>
@@ -256,7 +243,7 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
 
       <!-- Story text — right on desktop -->
       <Reveal delay={150}>
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-5">
           <SectionHeading
             eyebrow="Our story"
             title={story.heading}
@@ -288,25 +275,25 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
   </Section>
 
 
-  <!-- ─── 7. VISIT / CLOSING CTA BAND ─────────────────────────────────────── -->
-  <Section id="visit" bleed class="bg-primary">
+  <!-- ─── 7. VISIT / CLOSING CTA ──────────────────────────────────────────── -->
+  <Section id="visit" bleed class="bg-surface-2 border-y border-line">
     <Container>
       <div class="text-center py-4">
 
         <Reveal>
-          <p class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-on-primary leading-tight mb-4">
-            Come see us in Anakapalli.
+          <p class="font-display font-semibold text-2xl sm:text-3xl text-ink leading-tight mb-4">
+            Visit the showroom in Anakapalli
           </p>
-          <p class="text-on-primary/80 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Three floors of quality electrical products. Our team is here to help you find exactly what you need.
+          <p class="text-muted text-base mb-8 max-w-xl mx-auto leading-relaxed">
+            Three floors of electrical products, with staff available to help you compare options and confirm availability.
           </p>
         </Reveal>
 
         <!-- Address + Hours -->
         <Reveal delay={100}>
-          <div class="flex flex-col sm:flex-row gap-6 justify-center mb-10 text-on-primary/90">
+          <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8 text-ink">
             <div class="flex items-start gap-2 text-left">
-              <Icon name="tabler:map-pin" class="size-5 mt-0.5 shrink-0" aria-hidden="true" />
+              <Icon name="tabler:map-pin" class="size-5 mt-0.5 shrink-0 text-primary-text" aria-hidden="true" />
               <div class="text-sm">
                 <div>{site.address.line1}</div>
                 {site.address.line2 && <div>{site.address.line2}</div>}
@@ -314,7 +301,7 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
               </div>
             </div>
             <div class="flex items-start gap-2 text-left">
-              <Icon name="tabler:clock" class="size-5 mt-0.5 shrink-0" aria-hidden="true" />
+              <Icon name="tabler:clock" class="size-5 mt-0.5 shrink-0 text-primary-text" aria-hidden="true" />
               <div class="text-sm">
                 {site.hours.map((h) => (
                   <div>{h.days}: {h.time}</div>
@@ -335,14 +322,14 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
             />
             <a
               href={`tel:${site.phone}`}
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 border border-on-primary/50 text-on-primary hover:bg-on-primary/10"
+              class="inline-flex min-h-10 items-center justify-center gap-2 px-5 py-2.5 text-base font-medium rounded-md transition-colors border border-line text-ink bg-surface hover:border-primary hover:text-primary-text"
             >
               <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
               Call now
             </a>
             <a
               href="/visit-us"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 text-on-primary hover:bg-on-primary/10"
+              class="inline-flex min-h-10 items-center justify-center gap-2 px-5 py-2.5 text-base font-medium rounded-md transition-colors text-primary-text hover:bg-surface"
             >
               Get directions
             </a>
@@ -354,4 +341,3 @@ const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised de
   </Section>
 
 </BaseLayout>
-

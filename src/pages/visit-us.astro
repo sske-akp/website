@@ -32,11 +32,11 @@ import { site } from '../data/site';
 
   <!-- ─── Address + Hours ──────────────────────────────────────────────────── -->
   <Section>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
       <!-- Address & Hours -->
       <Reveal>
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-6">
 
           <!-- Address block -->
           <div class="flex flex-col gap-3">
@@ -100,7 +100,7 @@ import { site } from '../data/site';
       <Reveal delay={150}>
         <div class="flex flex-col gap-4">
           {site.mapEmbedUrl ? (
-            <div class="rounded-2xl overflow-hidden border border-line" style="aspect-ratio: 16/9">
+            <div class="rounded-lg overflow-hidden border border-line" style="aspect-ratio: 16/9">
               <iframe
                 src={site.mapEmbedUrl}
                 width="100%"
@@ -139,7 +139,7 @@ import { site } from '../data/site';
         { label: 'Industrial & switchgear', body: 'MCBs, ELCBs, contactors, motor protection, and automation components for industrial buyers.' },
       ].map((item, i) => (
         <Reveal delay={i * 100}>
-          <div class="bg-surface border border-line rounded-2xl p-6 flex flex-col gap-2">
+          <div class="bg-surface border border-line rounded-lg p-5 flex flex-col gap-2">
             <h3 class="font-display font-semibold text-ink">{item.label}</h3>
             <p class="text-muted text-sm leading-relaxed">{item.body}</p>
           </div>
@@ -155,14 +155,14 @@ import { site } from '../data/site';
 
 
   <!-- ─── Closing CTA ──────────────────────────────────────────────────────── -->
-  <Section bleed class="bg-primary">
+  <Section bleed class="bg-surface-2 border-y border-line">
     <Container>
       <Reveal>
         <div class="flex flex-col items-center gap-5 text-center py-4">
-          <p class="font-display font-bold text-3xl sm:text-4xl text-on-primary leading-tight">
+          <p class="font-display font-semibold text-2xl sm:text-3xl text-ink leading-tight">
             We're open and ready to help.
           </p>
-          <p class="text-on-primary/80 max-w-md">
+          <p class="text-muted max-w-md">
             Drop in or reach us first — WhatsApp is the quickest way to confirm stock or get a quote.
           </p>
           <div class="flex flex-wrap gap-3 justify-center">
@@ -174,7 +174,7 @@ import { site } from '../data/site';
             />
             <a
               href={`tel:${site.phone}`}
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 border border-on-primary/50 text-on-primary hover:bg-on-primary/10"
+              class="inline-flex min-h-10 items-center justify-center gap-2 px-5 py-2.5 text-base font-medium rounded-md transition-colors border border-line text-ink bg-surface hover:border-primary hover:text-primary-text"
             >
               <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
               Call now

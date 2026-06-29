@@ -6,7 +6,7 @@ import EnquireButton from './EnquireButton.astro';
 
 <!-- Safe-area padding for notched phones; BaseLayout adds pb-16 md:pb-0 for content clearance -->
 <div
-  class="fixed inset-x-0 bottom-0 z-40 md:hidden bg-surface/95 backdrop-blur-sm border-t border-line"
+  class="fixed inset-x-0 bottom-0 z-40 md:hidden bg-surface border-t border-line"
   style="padding-bottom: env(safe-area-inset-bottom);"
   aria-label="Quick contact bar"
 >
@@ -16,7 +16,7 @@ import EnquireButton from './EnquireButton.astro';
     <!-- Call -->
     <a
       href={`tel:${site.phone}`}
-      class="flex items-center justify-center gap-2 bg-surface py-3.5 min-h-[48px] text-ink font-medium text-sm hover:bg-surface-2 transition"
+      class="flex items-center justify-center gap-2 bg-surface py-3 min-h-[48px] text-ink font-medium text-sm hover:bg-surface-2 transition-colors"
     >
       <Icon name="tabler:phone" class="size-5 text-primary" aria-hidden="true" />
       <span>Call</span>
@@ -28,7 +28,7 @@ import EnquireButton from './EnquireButton.astro';
       variant="primary"
       fullWidth
       label="WhatsApp"
-      class="rounded-none py-3.5 min-h-[48px]"
+      class="rounded-none py-3 min-h-[48px]"
     />
   </div>
 </div>

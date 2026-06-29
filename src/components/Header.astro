@@ -25,18 +25,18 @@ const wordmark = site.shortName || site.businessName;
 
 <header
   data-header
-  class="sticky top-0 z-40 backdrop-blur-sm bg-canvas/85 border-b border-line"
+  class="sticky top-0 z-40 bg-canvas border-b border-line"
 >
   <div class="container-x">
-    <div class="flex items-center justify-between h-16 gap-4">
+    <div class="flex items-center justify-between h-14 gap-4">
 
       <!-- ── Brand ──────────────────────────────────────────────── -->
       <a
         href="/"
         aria-label={site.businessName}
-        class="flex items-center gap-1.5 font-display font-semibold text-lg text-ink hover:text-primary-text transition shrink-0"
+        class="flex items-center gap-1.5 font-display font-semibold text-base text-ink hover:text-primary-text transition-colors shrink-0"
       >
-        <Icon name="tabler:bolt" class="size-5 text-primary" aria-hidden="true" />
+        <Icon name="tabler:bolt" class="size-4.5 text-primary" aria-hidden="true" />
         <span>{wordmark}</span>
       </a>
 
@@ -47,7 +47,7 @@ const wordmark = site.shortName || site.businessName;
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'relative px-3 py-2 text-sm font-medium rounded-lg transition',
+              'relative px-2.5 py-2 text-sm font-medium rounded-md transition-colors',
               isActive(item.href)
                 ? 'text-primary-text'
                 : 'text-muted hover:text-ink hover:bg-surface-2',
@@ -78,7 +78,7 @@ const wordmark = site.shortName || site.businessName;
           aria-controls="mobile-nav"
           aria-expanded="false"
           aria-label="Open navigation menu"
-          class="md:hidden p-2 rounded-lg text-muted hover:text-ink hover:bg-surface-2 transition"
+          class="md:hidden p-2 rounded-md text-muted hover:text-ink hover:bg-surface-2 transition-colors"
         >
           <span data-icon-open aria-hidden="true">
             <Icon name="tabler:menu-2" class="size-6" />
@@ -103,7 +103,7 @@ const wordmark = site.shortName || site.businessName;
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'px-4 py-3 text-base font-medium rounded-xl transition',
+              'px-4 py-3 text-base font-medium rounded-md transition-colors',
               isActive(item.href)
                 ? 'text-primary-text bg-primary/5'
                 : 'text-ink hover:bg-surface-2',

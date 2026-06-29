@@ -34,6 +34,7 @@ const El = as as string;
 
   function init() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.documentElement.classList.add('motion-ok');
     document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach((el) => {
       observer.observe(el);
     });

@@ -6,19 +6,19 @@
 @theme {
   /* self-hosted variable fonts — imported in BaseLayout.astro */
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  /* type scale (px: 12 14 16 18 20 24 30 36 48 60) */
+  /* restrained type scale for a practical business/catalog site */
   --text-xs:   0.75rem;   --text-xs--line-height: 1rem;
   --text-sm:   0.875rem;  --text-sm--line-height: 1.25rem;
-  --text-base: 1rem;      --text-base--line-height: 1.6;
-  --text-lg:   1.125rem;  --text-lg--line-height: 1.7;
-  --text-xl:   1.25rem;   --text-xl--line-height: 1.6;
+  --text-base: 1rem;      --text-base--line-height: 1.55;
+  --text-lg:   1.125rem;  --text-lg--line-height: 1.6;
+  --text-xl:   1.25rem;   --text-xl--line-height: 1.45;
   --text-2xl:  1.5rem;    --text-2xl--line-height: 1.3;
   --text-3xl:  1.875rem;  --text-3xl--line-height: 1.2;  --text-3xl--letter-spacing: -0.01em;
   --text-4xl:  2.25rem;   --text-4xl--line-height: 1.12; --text-4xl--letter-spacing: -0.02em;
-  --text-5xl:  3rem;      --text-5xl--line-height: 1.05; --text-5xl--letter-spacing: -0.02em;
-  --text-6xl:  3.75rem;   --text-6xl--line-height: 1.02; --text-6xl--letter-spacing: -0.025em;
+  --text-5xl:  2.75rem;   --text-5xl--line-height: 1.08; --text-5xl--letter-spacing: -0.02em;
+  --text-6xl:  3.25rem;   --text-6xl--line-height: 1.06; --text-6xl--letter-spacing: -0.025em;
 
   /* semantic color tokens — actual values live in :root / .dark below */
   --color-canvas:       var(--c-canvas);
@@ -38,42 +38,42 @@
   --color-ring:         var(--c-ring);
 }
 
-/* ─── LIGHT — warm stone neutrals · copper primary · deep teal accent ─────── */
+/* ─── LIGHT — clean warm neutrals · copper CTA · industrial teal accent ────── */
 :root {
-  --c-canvas:        #faf9f7;
+  --c-canvas:        #fbfaf7;
   --c-surface:       #ffffff;
-  --c-surface-2:     #f4f2ef;
-  --c-ink:           #1c1917;
-  --c-muted:         #57534e;
-  --c-line:          #e7e3de;
-  --c-primary:       #c2410c;   /* copper — 4.58:1 on white ✓ AA large; use text-primary-text for body text */
-  --c-primary-hover: #9a3412;
-  --c-on-primary:    #ffffff;   /* white on copper: ~4.6:1 ✓ AA */
-  --c-primary-text:  #b43309;   /* darker copper for body-text links on light bg: ~5.3:1 ✓ AA */
-  --c-accent:        #0f766e;   /* deep teal — 4.51:1 on white ✓ AA */
-  --c-accent-hover:  #115e59;
+  --c-surface-2:     #f2f3f1;
+  --c-ink:           #202124;
+  --c-muted:         #5f6368;
+  --c-line:          #dedbd4;
+  --c-primary:       #a64218;
+  --c-primary-hover: #843313;
+  --c-on-primary:    #ffffff;
+  --c-primary-text:  #8f3717;
+  --c-accent:        #1f5f68;
+  --c-accent-hover:  #174952;
   --c-on-accent:     #ffffff;
-  --c-accent-text:   #0d6b63;   /* slightly darker for body-text on light bg: ~5.0:1 ✓ AA */
-  --c-ring: color-mix(in oklab, #c2410c 45%, transparent);
+  --c-accent-text:   #1d5a62;
+  --c-ring: color-mix(in oklab, #a64218 45%, transparent);
 }
 
-/* ─── DARK — warm charcoal · brightened copper · bright teal ─────────────── */
+/* ─── DARK — neutral charcoal · softened copper · readable teal ───────────── */
 .dark {
-  --c-canvas:        #1a1714;
-  --c-surface:       #232019;
-  --c-surface-2:     #2c2823;
-  --c-ink:           #f5f1ea;
-  --c-muted:         #b0a79c;
-  --c-line:          #3a342c;
-  --c-primary:       #d4541a;   /* brightened copper — visible on dark bg */
-  --c-primary-hover: #e2691f;
-  --c-on-primary:    #ffffff;   /* white on #d4541a: ~4.5:1 ✓ AA */
-  --c-primary-text:  #f0a06a;   /* light copper for links on dark bg: ~7.5:1 ✓ AA */
-  --c-accent:        #2dd4bf;   /* bright teal on dark bg: ~8.5:1 ✓ AA */
-  --c-accent-hover:  #5eead4;
-  --c-on-accent:     #07332f;   /* dark on bright teal ✓ */
-  --c-accent-text:   #5eead4;
-  --c-ring: color-mix(in oklab, #d4541a 55%, transparent);
+  --c-canvas:        #151617;
+  --c-surface:       #1f2022;
+  --c-surface-2:     #282a2d;
+  --c-ink:           #f4f1eb;
+  --c-muted:         #b7b2a8;
+  --c-line:          #383a3d;
+  --c-primary:       #c96b3d;
+  --c-primary-hover: #d77d51;
+  --c-on-primary:    #ffffff;
+  --c-primary-text:  #e3a07a;
+  --c-accent:        #58b8c2;
+  --c-accent-hover:  #78cad2;
+  --c-on-accent:     #082f35;
+  --c-accent-text:   #8dd7de;
+  --c-ring: color-mix(in oklab, #c96b3d 55%, transparent);
 }
 
 /* ─── BASE LAYER ─────────────────────────────────────────────────────────── */
@@ -84,6 +84,7 @@
   body {
     background-color: var(--color-canvas);
     color: var(--color-ink);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
@@ -104,11 +105,11 @@
     color: var(--color-on-primary);
   }
 
-  /* scroll-reveal: add [data-reveal] to any element; JS adds .is-visible */
-  [data-reveal] {
+  /* Reveal is progressive: content stays visible if JavaScript is unavailable. */
+  .motion-ok [data-reveal]:not(.is-visible) {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
   [data-reveal].is-visible {
     opacity: 1;
@@ -135,11 +136,11 @@
 @utility container-x {
   margin-inline: auto;
   width: 100%;
-  max-width: 80rem;
-  padding-inline: 1.25rem;
+  max-width: 76rem;
+  padding-inline: clamp(1rem, 3vw, 1.5rem);
 }
 
-/* Generous vertical rhythm: 48px mobile → 120px desktop */
+/* Clean vertical rhythm for a business site. */
 @utility section-y {
-  padding-block: clamp(3rem, 8vw, 7.5rem);
+  padding-block: clamp(2.25rem, 5vw, 4.75rem);
 }

@@ -33,7 +33,7 @@ const milestoneCount = story.milestones?.length ?? 0;
 
   <!-- ─── Story body ───────────────────────────────────────────────────────── -->
   <Section>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
       <!-- Main narrative -->
       <div class="lg:col-span-7 flex flex-col gap-6">
@@ -51,7 +51,7 @@ const milestoneCount = story.milestones?.length ?? 0;
       </div>
 
       <!-- Sidebar: milestones + second photo -->
-      <aside class="lg:col-span-5 flex flex-col gap-10">
+      <aside class="lg:col-span-5 flex flex-col gap-8">
 
         <!-- Milestones timeline -->
         {story.milestones && story.milestones.length > 0 && (

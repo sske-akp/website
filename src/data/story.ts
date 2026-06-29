@@ -1,10 +1,10 @@
 import type { StoryContent } from './types';
 
 export const story: StoryContent = {
-  heading: "Three floors. Twenty-five years. One trusted name.",
+  heading: "A family-run electrical showroom since 1998.",
 
   lead:
-    "Since 1998, Sri Sai Krishna Enterprises has been the electrical partner that homes, farms, and businesses in Anakapalli rely on — and we are now bringing that same dependability to the industrial sector.",
+    "Sri Sai Krishna Enterprises serves homes, farms, contractors, and businesses in Anakapalli with electrical products from established brands.",
 
   paragraphs: [
     "Sri Sai Krishna Enterprises was founded in 1998 as a family-run electrical retail business in Anakapalli, Visakhapatnam district. From the very beginning, the focus was simple: stock quality products from brands people can trust, and give every customer honest, knowledgeable service — whether they are wiring a new home or replacing a burned-out pump.",

@@ -20,13 +20,13 @@ const initials = brand.name.startsWith('[')
       .join('');
 ---
 
-<div class="bg-surface border border-line rounded-2xl p-5 flex flex-col gap-4 transition hover:-translate-y-1 hover:shadow-lg hover:border-primary/40">
+<div class="bg-surface border border-line rounded-lg p-5 flex flex-col gap-4 transition-colors hover:border-primary/40">
 
   <!-- Logo / Placeholder -->
   <div class="h-16 flex items-center">
     {isPlaceholderLogo ? (
       <div
-        class="w-14 h-14 rounded-xl bg-primary/10 text-primary-text flex items-center justify-center font-display font-bold text-xl select-none"
+        class="w-14 h-14 rounded-lg bg-surface-2 text-primary-text flex items-center justify-center font-display font-bold text-xl select-none"
         aria-hidden="true"
       >
         {initials}

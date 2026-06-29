@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EnquireButton from '../components/EnquireButton.astro';
+import Reveal from '../components/Reveal.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import { Icon } from 'astro-icon/components';
+import { productCategories } from '../data/productCategories';
+
+const agriCategories    = productCategories.filter(c => c.segments.includes('agriculture'));
+const homeCategories    = productCategories.filter(c => c.segments.includes('retail-home'));
+const indusCategories   = productCategories.filter(c => c.segments.includes('industrial'));
+---
+
+<BaseLayout
+  title="What We Serve"
+  description="Sri Sai Krishna Enterprises supplies electrical products for agriculture, homes, and industry in Anakapalli — pumps, cables, switchgear, fans, wiring and more."
+>
+
+  <!-- ─── Intro header ─────────────────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <Reveal>
+      <SectionHeading
+        as="h1"
+        eyebrow="Products by customer type"
+        title="The right product for every need"
+        intro="Whether you're a farmer needing a pump, a homeowner rewiring a room, or an industrial buyer sourcing switchgear — find what you need, then reach us on WhatsApp."
+        align="center"
+      />
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Agriculture ──────────────────────────────────────────────────────── -->
+  <Section id="agriculture">
+    <Reveal>
+      <div class="flex items-center gap-3 mb-8">
+        <div class="bg-surface-2 text-muted rounded-xl p-2.5">
+          <Icon name="tabler:tractor" class="size-6" aria-hidden="true" />
+        </div>
+        <SectionHeading
+          eyebrow="Segment"
+          title="Agriculture"
+          intro="Pumps, cables, and starters built for dependable field operation season after season."
+        />
+      </div>
+    </Reveal>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {agriCategories.map((cat, i) => (
+        <Reveal delay={i * 80}>
+          <CategoryCard category={cat} />
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-8">
+      <EnquireButton
+        context="I'm a farmer / agricultural buyer and need help with irrigation equipment"
+        label="Enquire about agricultural products"
+        variant="outline"
+      />
+    </div>
+  </Section>
+
+
+  <!-- ─── Home & Retail ────────────────────────────────────────────────────── -->
+  <Section id="retail-home" class="bg-surface-2">
+    <Reveal>
+      <div class="flex items-center gap-3 mb-8">
+        <div class="bg-surface text-muted rounded-xl p-2.5">
+          <Icon name="tabler:home" class="size-6" aria-hidden="true" />
+        </div>
+        <SectionHeading
+          eyebrow="Segment"
+          title="Home & Retail"
+          intro="Fans, wiring, switches, lighting, and cables from trusted brands — for every home and building project."
+        />
+      </div>
+    </Reveal>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {homeCategories.map((cat, i) => (
+        <Reveal delay={i * 80}>
+          <CategoryCard category={cat} />
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-8">
+      <EnquireButton
+        context="I'm looking for electrical products for my home or a building project"
+        label="Enquire about home products"
+        variant="outline"
+      />
+    </div>
+  </Section>
+
+
+  <!-- ─── Industrial ───────────────────────────────────────────────────────── -->
+  <Section id="industrial">
+    <Reveal>
+      <div class="flex items-center gap-3 mb-2">
+        <div class="bg-primary/10 text-primary-text rounded-xl p-2.5">
+          <Icon name="tabler:building-factory-2" class="size-6" aria-hidden="true" />
+        </div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-text">
+          Growing focus
+        </span>
+      </div>
+      <div class="mb-8">
+        <SectionHeading
+          eyebrow="Segment"
+          title="Industry"
+          intro="Switchgear, motor controls, automation components, and panel supplies — SSKE is expanding into industrial supply with the same authorised-dealer reliability."
+        />
+      </div>
+    </Reveal>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {indusCategories.map((cat, i) => (
+        <Reveal delay={i * 80}>
+          <CategoryCard category={cat} />
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-8">
+      <EnquireButton
+        context="I'm an industrial buyer looking for switchgear, motor controls, or automation components"
+        label="Enquire about industrial products"
+        size="lg"
+      />
+    </div>
+  </Section>
+
+
+  <!-- ─── Closing CTA ──────────────────────────────────────────────────────── -->
+  <Section bleed class="bg-surface-2">
+    <Container>
+      <Reveal>
+        <div class="flex flex-col items-center gap-4 text-center">
+          <p class="font-display font-semibold text-2xl sm:text-3xl text-ink max-w-xl leading-tight">
+            Can't find what you need? Just ask.
+          </p>
+          <p class="text-muted max-w-md">
+            If we stock it, we'll confirm. If we don't, we'll point you in the right direction.
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center pt-1">
+            <EnquireButton
+              context="I'm looking for a specific electrical product and can't find it on your site"
+              label="Ask about any product"
+              size="lg"
+            />
+          </div>
+        </div>
+      </Reveal>
+    </Container>
+  </Section>
+
+</BaseLayout>

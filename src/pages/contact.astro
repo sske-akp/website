@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EnquireButton from '../components/EnquireButton.astro';
+import Button from '../components/Button.astro';
+import Reveal from '../components/Reveal.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+
+---
+
+<!-- A server-backed contact form is intentionally deferred to a later phase (static hosting / no backend in Phase 1) -->
+
+<BaseLayout
+  title="Contact"
+  description="Reach Sri Sai Krishna Enterprises in Anakapalli — WhatsApp or call for the fastest response. Enquire about products, stock, or visit our 3-floor showroom."
+>
+
+  <!-- ─── Hero header ──────────────────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <Reveal>
+      <SectionHeading
+        as="h1"
+        eyebrow="Get in touch"
+        title="We're easy to reach"
+        intro="WhatsApp is the fastest way to get a response — send a message and we'll reply quickly. Prefer to call? We're available during showroom hours."
+        align="center"
+      />
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Primary contact cards ────────────────────────────────────────────── -->
+  <Section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+
+      <!-- WhatsApp card -->
+      <Reveal>
+        <div class="flex flex-col gap-5 bg-surface border border-line rounded-2xl p-8 h-full">
+          <div class="bg-accent/10 text-accent-text rounded-xl p-3 w-fit">
+            <Icon name="tabler:brand-whatsapp" class="size-7" aria-hidden="true" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <h2 class="font-display font-semibold text-xl text-ink">WhatsApp</h2>
+            <p class="text-muted text-sm leading-relaxed">
+              The fastest way to reach us. Send a message any time and we'll respond during business hours.
+            </p>
+          </div>
+          <div class="mt-auto">
+            <EnquireButton
+              context="I'd like to get in touch with Sri Sai Krishna Enterprises"
+              label="Message us on WhatsApp"
+              size="lg"
+              fullWidth
+            />
+          </div>
+        </div>
+      </Reveal>
+
+      <!-- Call card -->
+      <Reveal delay={120}>
+        <div class="flex flex-col gap-5 bg-surface border border-line rounded-2xl p-8 h-full">
+          <div class="bg-primary/10 text-primary-text rounded-xl p-3 w-fit">
+            <Icon name="tabler:phone" class="size-7" aria-hidden="true" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <h2 class="font-display font-semibold text-xl text-ink">Call</h2>
+            <p class="text-muted text-sm leading-relaxed">
+              Speak to someone directly during showroom hours. We're happy to answer questions and check stock.
+            </p>
+            <p class="font-display font-bold text-2xl text-ink mt-2">
+              {site.phoneDisplay}
+            </p>
+          </div>
+          <div class="mt-auto">
+            <Button href={`tel:${site.phone}`} variant="outline" size="lg" fullWidth>
+              <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
+              Call the showroom
+            </Button>
+          </div>
+        </div>
+      </Reveal>
+
+    </div>
+
+    <!-- Soft note -->
+    <Reveal delay={200}>
+      <p class="mt-6 text-muted text-sm text-center max-w-lg mx-auto">
+        WhatsApp is the quickest way to reach us for product enquiries, stock checks, and general questions. We typically respond within a few hours during business hours.
+      </p>
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Hours + Address summary ──────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <div class="max-w-2xl mx-auto">
+      <Reveal>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+
+          <!-- Hours -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2">
+              <Icon name="tabler:clock" class="size-5 text-primary-text shrink-0" aria-hidden="true" />
+              <h2 class="font-display font-semibold text-lg text-ink">Opening hours</h2>
+            </div>
+            <dl class="flex flex-col gap-2 pl-7">
+              {site.hours.map((h) => (
+                <div class="flex flex-col">
+                  <dt class="font-medium text-ink text-sm">{h.days}</dt>
+                  <dd class="text-muted text-sm">{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <!-- Address -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2">
+              <Icon name="tabler:map-pin" class="size-5 text-primary-text shrink-0" aria-hidden="true" />
+              <h2 class="font-display font-semibold text-lg text-ink">Showroom address</h2>
+            </div>
+            <address class="not-italic text-ink text-sm leading-relaxed pl-7">
+              <div>{site.address.line1}</div>
+              {site.address.line2 && <div>{site.address.line2}</div>}
+              <div>{site.address.city}, {site.address.district}</div>
+              <div>{site.address.state}</div>
+            </address>
+            <div class="pl-7">
+              <Button href="/visit-us" variant="ghost" size="sm">
+                Visit us page →
+              </Button>
+            </div>
+          </div>
+
+        </div>
+      </Reveal>
+    </div>
+  </Section>
+
+</BaseLayout>

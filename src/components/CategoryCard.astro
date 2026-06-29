@@ -1,0 +1,52 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { ProductCategory } from '../data/types';
+import EnquireButton from './EnquireButton.astro';
+
+interface Props {
+  category: ProductCategory;
+}
+
+const { category } = Astro.props;
+
+const segmentLabels: Record<string, string> = {
+  agriculture:  'Agriculture',
+  industrial:   'Industrial',
+  'retail-home': 'Home & Retail',
+};
+---
+
+<div class="bg-surface border border-line rounded-2xl p-5 flex flex-col gap-4 transition hover:-translate-y-1 hover:shadow-lg hover:border-primary/40">
+
+  <!-- Icon tile -->
+  <div class="bg-primary/10 text-primary-text rounded-xl p-3 w-fit">
+    <Icon name={`tabler:${category.icon}`} class="size-6" aria-hidden="true" />
+  </div>
+
+  <!-- Content -->
+  <div class="flex flex-col gap-1.5 flex-1">
+    <h3 class="font-display font-semibold text-ink">{category.name}</h3>
+    <p class="text-muted text-sm leading-relaxed">{category.description}</p>
+  </div>
+
+  <!-- Segment pills -->
+  {category.segments.length > 0 && (
+    <div class="flex flex-wrap gap-1.5">
+      {category.segments.map((seg) => (
+        <span class="bg-accent/10 text-accent-text rounded-full px-2.5 py-0.5 text-xs">
+          {segmentLabels[seg] ?? seg}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <!-- CTA -->
+  <div class="mt-auto">
+    <EnquireButton
+      context={`I'd like to know about ${category.name}`}
+      size="sm"
+      variant="ghost"
+      label="Ask about this"
+    />
+  </div>
+</div>

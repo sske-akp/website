@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EnquireButton from '../components/EnquireButton.astro';
+import Button from '../components/Button.astro';
+import Reveal from '../components/Reveal.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Visit Us"
+  description="Find Sri Sai Krishna Enterprises in Anakapalli, Visakhapatnam district — a 3-floor showroom stocked with electrical products for homes, farms, and industry."
+>
+
+  <!-- ─── Hero header ──────────────────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <Reveal>
+      <SectionHeading
+        as="h1"
+        eyebrow="3-floor showroom · Anakapalli"
+        title="Come see us in person"
+        intro="Our showroom is stocked and our team is ready to help. Walk in, browse the range, and get honest product advice — no appointment needed."
+        align="center"
+      />
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Address + Hours ──────────────────────────────────────────────────── -->
+  <Section>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+      <!-- Address & Hours -->
+      <Reveal>
+        <div class="flex flex-col gap-8">
+
+          <!-- Address block -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2 text-primary-text">
+              <Icon name="tabler:map-pin" class="size-5 shrink-0" aria-hidden="true" />
+              <h2 class="font-display font-semibold text-lg text-ink">Address</h2>
+            </div>
+            <address class="not-italic text-ink leading-relaxed pl-7">
+              <div>{site.address.line1}</div>
+              {site.address.line2 && <div>{site.address.line2}</div>}
+              <div>{site.address.city}</div>
+              <div>{site.address.district} district, {site.address.state}</div>
+              {site.address.pincode && <div>PIN: {site.address.pincode}</div>}
+            </address>
+            <div class="pl-7">
+              <Button href={site.mapLink} variant="outline" size="sm">
+                Get directions →
+              </Button>
+            </div>
+          </div>
+
+          <!-- Hours block -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2 text-primary-text">
+              <Icon name="tabler:clock" class="size-5 shrink-0" aria-hidden="true" />
+              <h2 class="font-display font-semibold text-lg text-ink">Opening hours</h2>
+            </div>
+            <dl class="pl-7 flex flex-col gap-2">
+              {site.hours.map((h) => (
+                <div class="flex flex-col sm:flex-row sm:gap-4">
+                  <dt class="font-medium text-ink min-w-36">{h.days}</dt>
+                  <dd class="text-muted">{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <!-- Contact CTAs -->
+          <div class="flex flex-col gap-3 pl-0">
+            <div class="flex items-center gap-2 text-primary-text">
+              <Icon name="tabler:phone" class="size-5 shrink-0" aria-hidden="true" />
+              <h2 class="font-display font-semibold text-lg text-ink">Call ahead</h2>
+            </div>
+            <div class="pl-7 flex flex-wrap gap-3">
+              <EnquireButton
+                context="I'd like to visit the showroom — please let me know your availability"
+                label="WhatsApp us"
+                size="md"
+              />
+              <Button href={`tel:${site.phone}`} variant="outline" size="md">
+                <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
+                {site.phoneDisplay}
+              </Button>
+            </div>
+          </div>
+
+        </div>
+      </Reveal>
+
+      <!-- Map -->
+      <Reveal delay={150}>
+        <div class="flex flex-col gap-4">
+          {site.mapEmbedUrl ? (
+            <div class="rounded-2xl overflow-hidden border border-line" style="aspect-ratio: 16/9">
+              <iframe
+                src={site.mapEmbedUrl}
+                width="100%"
+                height="100%"
+                style="border: 0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Sri Sai Krishna Enterprises on Google Maps"
+              ></iframe>
+            </div>
+          ) : (
+            <PhotoPlaceholder
+              label="[MAP EMBED — ADD BEFORE LAUNCH]"
+              icon="map-pin"
+              ratio="16/9"
+            />
+          )}
+        </div>
+      </Reveal>
+
+    </div>
+  </Section>
+
+
+  <!-- ─── Showroom highlights ──────────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <SectionHeading
+      eyebrow="The showroom"
+      title="Three floors of electrical expertise"
+      intro="Browse a curated range across every category — and get guidance from a team that has been doing this for 25+ years."
+    />
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5">
+      {[
+        { label: 'Agriculture floor', body: 'Pumps, submersible cables, motor starters, and agricultural wiring — the full range for farm buyers.' },
+        { label: 'Home & retail floor', body: 'Fans, switches, wiring accessories, lighting, and household cables from trusted brands.' },
+        { label: 'Industrial & switchgear', body: 'MCBs, ELCBs, contactors, motor protection, and automation components for industrial buyers.' },
+      ].map((item, i) => (
+        <Reveal delay={i * 100}>
+          <div class="bg-surface border border-line rounded-2xl p-6 flex flex-col gap-2">
+            <h3 class="font-display font-semibold text-ink">{item.label}</h3>
+            <p class="text-muted text-sm leading-relaxed">{item.body}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+    <Reveal delay={150}>
+      <div class="mt-8">
+        <PhotoPlaceholder ratio="16/9" label="[3-floor showroom overview — photo coming soon]" />
+      </div>
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Closing CTA ──────────────────────────────────────────────────────── -->
+  <Section bleed class="bg-primary">
+    <Container>
+      <Reveal>
+        <div class="flex flex-col items-center gap-5 text-center py-4">
+          <p class="font-display font-bold text-3xl sm:text-4xl text-on-primary leading-tight">
+            We're open and ready to help.
+          </p>
+          <p class="text-on-primary/80 max-w-md">
+            Drop in or reach us first — WhatsApp is the quickest way to confirm stock or get a quote.
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <EnquireButton
+              context="I'd like to visit your showroom in Anakapalli"
+              label="Message us on WhatsApp"
+              variant="accent"
+              size="lg"
+            />
+            <a
+              href={`tel:${site.phone}`}
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 border border-on-primary/50 text-on-primary hover:bg-on-primary/10"
+            >
+              <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
+              Call now
+            </a>
+          </div>
+        </div>
+      </Reveal>
+    </Container>
+  </Section>
+
+</BaseLayout>

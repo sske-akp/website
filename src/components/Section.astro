@@ -1,0 +1,16 @@
+---
+// Layout primitive: full section-y vertical rhythm.
+// Pass bleed={true} to skip the inner Container (full-bleed backgrounds, etc.).
+import Container from './Container.astro';
+
+interface Props {
+  id?: string;
+  bleed?: boolean;
+  class?: string;
+}
+
+const { id, bleed = false, class: className } = Astro.props;
+---
+<section id={id} class:list={["section-y", className]}>
+  {bleed ? <slot /> : <Container><slot /></Container>}
+</section>

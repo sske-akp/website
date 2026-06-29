@@ -1,0 +1,357 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EnquireButton from '../components/EnquireButton.astro';
+import Button from '../components/Button.astro';
+import Reveal from '../components/Reveal.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import { brands } from '../data/brands';
+import { productCategories } from '../data/productCategories';
+import { story } from '../data/story';
+
+const featuredCategories = productCategories.slice(0, 6);
+
+interface Segment {
+  icon: string;
+  label: string;
+  heading: string;
+  body: string;
+  href: string;
+  highlight: boolean;
+}
+
+const segments: Segment[] = [
+  {
+    icon: 'tractor',
+    label: 'Agriculture',
+    heading: 'Built for the farm',
+    body: 'Submersible pumps, flat cables, motor starters — everything to keep irrigation running through every growing season.',
+    href: '/what-we-serve#agriculture',
+    highlight: false,
+  },
+  {
+    icon: 'home',
+    label: 'Home & Retail',
+    heading: 'Wired for home',
+    body: 'Fans, switches, wiring, lighting, cables — trusted brands at honest prices for homeowners, builders, and electricians.',
+    href: '/what-we-serve#retail-home',
+    highlight: false,
+  },
+  {
+    icon: 'building-factory-2',
+    label: 'Industry',
+    heading: 'Powering industry',
+    body: 'Switchgear, contactors, control panels, automation components — authorised supply as we strategically grow into industrial.',
+    href: '/what-we-serve#industrial',
+    highlight: true,
+  },
+];
+
+const trustItems = ['Est. 1998', '25+ years', '3-floor showroom', 'Authorised dealer & distributor'];
+---
+
+<BaseLayout
+  description="Sri Sai Krishna Enterprises — Anakapalli's trusted electrical dealer and distributor since 1998. Pumps, cables, switchgear, fans and more for homes, farms and industry."
+>
+
+  <!-- ─── 1. HERO ──────────────────────────────────────────────────────────── -->
+  <!-- TODO: replace CSS hero backdrop with a real showroom photo or short muted loop when available -->
+  <Section id="hero" bleed class="relative overflow-hidden">
+
+    <!-- Layered CSS backdrop: gradient + dot grid + radial glow -->
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(140deg, color-mix(in oklab, var(--c-primary) 14%, var(--c-canvas)) 0%, var(--c-canvas) 55%, color-mix(in oklab, var(--c-accent) 7%, var(--c-canvas)) 100%)"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute inset-0 opacity-40"
+      style="background-image: radial-gradient(circle, var(--c-line) 1px, transparent 1px); background-size: 22px 22px"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse 55% 65% at 5% 65%, color-mix(in oklab, var(--c-primary) 16%, transparent) 0%, transparent 60%)"
+      aria-hidden="true"
+    ></div>
+
+    <Container>
+      <div class="relative z-10 flex flex-col gap-6 max-w-3xl py-6 sm:py-12">
+
+        <!-- Eyebrow -->
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-text">
+          Anakapalli · Since 1998
+        </span>
+
+        <!-- H1 — only h1 on the page -->
+        <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink leading-tight">
+          Powering homes, farms&nbsp;&amp;&nbsp;industry —&nbsp;for&nbsp;25+&nbsp;years.
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-muted text-lg sm:text-xl max-w-xl leading-relaxed">
+          Your authorised electrical dealer in Anakapalli, serving homes, farms, and businesses across Visakhapatnam district.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-3">
+          <EnquireButton
+            context="I'd like to enquire about your products"
+            label="Chat on WhatsApp"
+            size="lg"
+          />
+          <Button href={`tel:${site.phone}`} variant="outline" size="lg">
+            <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
+            Call the showroom
+          </Button>
+          <Button href="/visit-us" variant="ghost" size="lg">
+            Visit our showroom
+          </Button>
+        </div>
+
+        <!-- Trust row -->
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          {trustItems.map((item) => (
+            <div class="flex items-center gap-1.5 text-sm text-muted">
+              <Icon name="tabler:check" class="size-4 text-primary-text shrink-0" aria-hidden="true" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </Container>
+  </Section>
+
+
+  <!-- ─── 2. POSITIONING STATEMENT ────────────────────────────────────────── -->
+  <Section>
+    <Reveal>
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="font-display font-semibold text-3xl sm:text-4xl lg:text-5xl text-ink leading-tight">
+          The electrical partner that Anakapalli has trusted since 1998.
+        </p>
+        <p class="mt-6 text-muted text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+          From wiring a new home and running a farm pump to supplying an industrial project — we bring quality brands, honest advice, and 25 years of field knowledge to every customer.
+        </p>
+      </div>
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── 3. WHO WE SERVE ──────────────────────────────────────────────────── -->
+  <Section id="who-we-serve" class="bg-surface-2">
+    <SectionHeading
+      eyebrow="Who we serve"
+      title="For every electrical need"
+      intro="Three distinct customer types. One trusted source. Stocked and ready in Anakapalli."
+      align="center"
+    />
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {segments.map((seg, i) => (
+        <Reveal delay={i * 110}>
+          <a
+            href={seg.href}
+            class:list={[
+              'group flex flex-col gap-5 p-6 sm:p-8 rounded-2xl border transition hover:-translate-y-1 hover:shadow-lg h-full',
+              seg.highlight
+                ? 'bg-surface border-primary/30 hover:border-primary'
+                : 'bg-surface border-line hover:border-primary/40',
+            ]}
+          >
+            <div
+              class:list={[
+                'w-14 h-14 rounded-2xl flex items-center justify-center shrink-0',
+                seg.highlight
+                  ? 'bg-primary/15 text-primary-text'
+                  : 'bg-surface-2 text-muted',
+              ]}
+            >
+              <Icon name={`tabler:${seg.icon}`} class="size-7" aria-hidden="true" />
+            </div>
+
+            {seg.highlight && (
+              <span class="text-xs font-semibold uppercase tracking-widest text-primary-text -mb-2">
+                Growing focus
+              </span>
+            )}
+
+            <div class="flex flex-col gap-2 flex-1">
+              <h2 class="font-display font-semibold text-xl text-ink">{seg.heading}</h2>
+              <p class="text-muted text-sm leading-relaxed">{seg.body}</p>
+            </div>
+
+            <div class="flex items-center gap-1.5 text-sm font-medium text-primary-text mt-auto transition-all group-hover:gap-2.5">
+              Explore
+              <Icon name="tabler:arrow-right" class="size-4" aria-hidden="true" />
+            </div>
+          </a>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+
+
+  <!-- ─── 4. WHAT WE STOCK ─────────────────────────────────────────────────── -->
+  <Section id="what-we-stock">
+    <SectionHeading
+      eyebrow="What we stock"
+      title="Quality products across every category"
+      intro="From a pump for your field to switchgear for your factory — stocked and ready in Anakapalli."
+      align="center"
+    />
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {featuredCategories.map((cat, i) => (
+        <Reveal delay={i * 75}>
+          <CategoryCard category={cat} />
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-10 text-center">
+      <Button href="/what-we-serve" variant="outline" size="lg">
+        See everything we stock →
+      </Button>
+    </div>
+  </Section>
+
+
+  <!-- ─── 5. BRANDS ────────────────────────────────────────────────────────── -->
+  <Section id="brands" class="bg-surface-2">
+    <SectionHeading
+      eyebrow="Brands we carry"
+      title="Brands you trust, under one roof"
+      intro="Every brand on our shelves is an authorised partnership — quality you can count on."
+      align="center"
+    />
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      {brands.map((brand, i) => (
+        <Reveal delay={i * 60}>
+          <div class="bg-surface border border-line rounded-xl px-5 py-5 font-display font-bold text-xl sm:text-2xl text-ink text-center transition hover:-translate-y-1 hover:shadow-md hover:border-primary/40 cursor-default select-none">
+            {brand.name}
+          </div>
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-8 text-center">
+      <Button href="/brands" variant="ghost">
+        See all brands →
+      </Button>
+    </div>
+  </Section>
+
+
+  <!-- ─── 6. STORY TEASER ──────────────────────────────────────────────────── -->
+  <Section id="our-story" class="bg-surface">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <!-- Photo placeholder — left on desktop -->
+      <Reveal>
+        <PhotoPlaceholder ratio="4/3" label="[Showroom photo coming soon]" />
+      </Reveal>
+
+      <!-- Story text — right on desktop -->
+      <Reveal delay={150}>
+        <div class="flex flex-col gap-6">
+          <SectionHeading
+            eyebrow="Our story"
+            title={story.heading}
+            intro={story.lead}
+          />
+
+          <!-- Compact milestones -->
+          {story.milestones && story.milestones.length > 0 && (
+            <div class="border-l-2 border-primary/30 pl-5 flex flex-col gap-4">
+              {story.milestones.map((m) => (
+                <div>
+                  <span class="block font-display font-bold text-primary-text text-sm uppercase tracking-wide">
+                    {m.year}
+                  </span>
+                  <p class="text-muted text-sm mt-0.5">{m.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div>
+            <Button href="/our-story" variant="outline">
+              Read our story →
+            </Button>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </Section>
+
+
+  <!-- ─── 7. VISIT / CLOSING CTA BAND ─────────────────────────────────────── -->
+  <Section id="visit" bleed class="bg-primary">
+    <Container>
+      <div class="text-center py-4">
+
+        <Reveal>
+          <p class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-on-primary leading-tight mb-4">
+            Come see us in Anakapalli.
+          </p>
+          <p class="text-on-primary/80 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+            Three floors of quality electrical products. Our team is here to help you find exactly what you need.
+          </p>
+        </Reveal>
+
+        <!-- Address + Hours -->
+        <Reveal delay={100}>
+          <div class="flex flex-col sm:flex-row gap-6 justify-center mb-10 text-on-primary/90">
+            <div class="flex items-start gap-2 text-left">
+              <Icon name="tabler:map-pin" class="size-5 mt-0.5 shrink-0" aria-hidden="true" />
+              <div class="text-sm">
+                <div>{site.address.line1}</div>
+                {site.address.line2 && <div>{site.address.line2}</div>}
+                <div>{site.address.city}, {site.address.district}</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-2 text-left">
+              <Icon name="tabler:clock" class="size-5 mt-0.5 shrink-0" aria-hidden="true" />
+              <div class="text-sm">
+                {site.hours.map((h) => (
+                  <div>{h.days}: {h.time}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <!-- CTAs -->
+        <Reveal delay={200}>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <EnquireButton
+              context="I'd like to visit the showroom and have some questions"
+              label="Message us on WhatsApp"
+              variant="accent"
+              size="lg"
+            />
+            <a
+              href={`tel:${site.phone}`}
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 border border-on-primary/50 text-on-primary hover:bg-on-primary/10"
+            >
+              <Icon name="tabler:phone" class="size-5" aria-hidden="true" />
+              Call now
+            </a>
+            <a
+              href="/visit-us"
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-xl transition hover:-translate-y-0.5 active:translate-y-0 text-on-primary hover:bg-on-primary/10"
+            >
+              Get directions
+            </a>
+          </div>
+        </Reveal>
+
+      </div>
+    </Container>
+  </Section>
+
+</BaseLayout>
+

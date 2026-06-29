@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EnquireButton from '../components/EnquireButton.astro';
+import Reveal from '../components/Reveal.astro';
+import BrandCard from '../components/BrandCard.astro';
+import { brands } from '../data/brands';
+---
+
+<BaseLayout
+  title="Brands"
+  description="Sri Sai Krishna Enterprises stocks L&T, AquaTexmo, Crompton, Almonard, GM, Finolex, and RR Cables — authorised dealer and distributor in Anakapalli."
+>
+
+  <!-- ─── Hero header ──────────────────────────────────────────────────────── -->
+  <Section class="bg-surface-2">
+    <Reveal>
+      <SectionHeading
+        as="h1"
+        eyebrow="Authorised dealer & distributor"
+        title="Brands you trust, under one roof"
+        intro="Every brand we carry is an authorised partnership — consistent quality, genuine products, and manufacturer-backed reliability."
+        align="center"
+      />
+    </Reveal>
+  </Section>
+
+
+  <!-- ─── Brand grid ───────────────────────────────────────────────────────── -->
+  <Section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {brands.map((brand, i) => (
+        <Reveal delay={i * 80}>
+          <BrandCard brand={brand} />
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+
+
+  <!-- ─── Authorised dealer note + CTA ────────────────────────────────────── -->
+  <Section bleed class="bg-surface-2">
+    <Container>
+      <Reveal>
+        <div class="flex flex-col items-center gap-5 text-center">
+          <p class="font-display font-semibold text-2xl sm:text-3xl text-ink max-w-2xl leading-tight">
+            Sri Sai Krishna Enterprises is an authorised dealer and distributor for all brands we stock.
+          </p>
+          <p class="text-muted max-w-lg leading-relaxed">
+            Every product comes through official channels. Not sure if we carry a particular brand or range? Just ask — we're happy to confirm or help you find the right alternative.
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center pt-1">
+            <EnquireButton
+              context="I'd like to ask if you stock a particular brand"
+              label="Ask about a brand"
+              size="lg"
+            />
+          </div>
+        </div>
+      </Reveal>
+    </Container>
+  </Section>
+
+</BaseLayout>

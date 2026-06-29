@@ -1,0 +1,64 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+
+interface Props {
+  context: string;
+  variant?: 'primary' | 'accent' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  fullWidth?: boolean;
+  label?: string;
+  class?: string;
+  iconOnly?: boolean;
+}
+
+const {
+  context,
+  variant = 'primary',
+  size = 'md',
+  fullWidth = false,
+  label = 'Enquire on WhatsApp',
+  class: className,
+  iconOnly = false,
+} = Astro.props;
+
+const message = `Hi ${site.businessName}, ${context}`;
+const href = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+
+const sizeClasses: Record<NonNullable<Props['size']>, string> = {
+  sm: 'px-3 py-1.5 text-sm gap-1.5',
+  md: 'px-4 py-2 text-base gap-2',
+  lg: 'px-6 py-3 text-lg gap-2.5',
+};
+
+const iconSizeClasses: Record<NonNullable<Props['size']>, string> = {
+  sm: 'size-4',
+  md: 'size-5',
+  lg: 'size-5',
+};
+
+const variantClasses: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'bg-primary text-on-primary hover:bg-primary-hover',
+  accent:  'bg-accent text-on-accent hover:bg-accent-hover',
+  outline: 'border border-line text-ink hover:border-primary hover:text-primary-text',
+  ghost:   'text-primary-text hover:bg-primary/10',
+};
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  aria-label={iconOnly ? label : undefined}
+  class:list={[
+    'inline-flex items-center justify-center font-medium rounded-xl transition',
+    'hover:-translate-y-0.5 active:translate-y-0',
+    sizeClasses[size],
+    variantClasses[variant],
+    fullWidth && 'w-full',
+    className,
+  ]}
+>
+  <Icon name="tabler:brand-whatsapp" class={iconSizeClasses[size]} aria-hidden="true" />
+  {!iconOnly && <span>{label}</span>}
+</a>

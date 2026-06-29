@@ -1,0 +1,46 @@
+---
+interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  delay?: number;
+}
+
+const { as = 'div', class: className, delay } = Astro.props;
+// Uppercase alias required for Astro dynamic element rendering
+const El = as as string;
+---
+
+<El
+  data-reveal
+  class={className}
+  style={delay ? `transition-delay: ${delay}ms` : undefined}
+>
+  <slot />
+</El>
+
+<script>
+  // Module-level singleton — deduplicated by Astro, cached by browser across navigations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.1 },
+  );
+
+  function init() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Fire on initial load (module is deferred — DOM is ready)
+  init();
+  // Re-run after every view-transition navigation
+  document.addEventListener('astro:page-load', init);
+</script>

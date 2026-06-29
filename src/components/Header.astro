@@ -1,0 +1,172 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import ThemeToggle from './ThemeToggle.astro';
+import EnquireButton from './EnquireButton.astro';
+
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Home',          href: '/' },
+  { label: 'Our Story',     href: '/our-story' },
+  { label: 'Brands',        href: '/brands' },
+  { label: 'What We Serve', href: '/what-we-serve' },
+  { label: 'Visit Us',      href: '/visit-us' },
+  { label: 'Contact',       href: '/contact' },
+] as const;
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+
+const wordmark = site.shortName || site.businessName;
+---
+
+<header
+  data-header
+  class="sticky top-0 z-40 backdrop-blur-sm bg-canvas/85 border-b border-line"
+>
+  <div class="container-x">
+    <div class="flex items-center justify-between h-16 gap-4">
+
+      <!-- ── Brand ──────────────────────────────────────────────── -->
+      <a
+        href="/"
+        aria-label={site.businessName}
+        class="flex items-center gap-1.5 font-display font-semibold text-lg text-ink hover:text-primary-text transition shrink-0"
+      >
+        <Icon name="tabler:bolt" class="size-5 text-primary" aria-hidden="true" />
+        <span>{wordmark}</span>
+      </a>
+
+      <!-- ── Desktop nav ────────────────────────────────────────── -->
+      <nav class="hidden md:flex items-center gap-0.5 flex-1" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'relative px-3 py-2 text-sm font-medium rounded-lg transition',
+              isActive(item.href)
+                ? 'text-primary-text'
+                : 'text-muted hover:text-ink hover:bg-surface-2',
+            ]}
+          >
+            {item.label}
+            {isActive(item.href) && (
+              <span
+                class="absolute inset-x-3 bottom-0.5 h-0.5 rounded-full bg-primary"
+                aria-hidden="true"
+              />
+            )}
+          </a>
+        ))}
+      </nav>
+
+      <!-- ── Right actions ──────────────────────────────────────── -->
+      <div class="flex items-center gap-2 shrink-0">
+        <ThemeToggle />
+
+        <div class="hidden md:block">
+          <EnquireButton context="I'd like to enquire" size="sm" />
+        </div>
+
+        <!-- Hamburger (mobile only) -->
+        <button
+          data-nav-toggle
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+          aria-label="Open navigation menu"
+          class="md:hidden p-2 rounded-lg text-muted hover:text-ink hover:bg-surface-2 transition"
+        >
+          <span data-icon-open aria-hidden="true">
+            <Icon name="tabler:menu-2" class="size-6" />
+          </span>
+          <span data-icon-close aria-hidden="true" class="hidden">
+            <Icon name="tabler:x" class="size-6" />
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Mobile nav panel ───────────────────────────────────── -->
+    <div
+      id="mobile-nav"
+      data-mobile-nav
+      class="hidden md:hidden border-t border-line py-3 pb-4"
+      aria-label="Mobile navigation"
+    >
+      <nav class="flex flex-col">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'px-4 py-3 text-base font-medium rounded-xl transition',
+              isActive(item.href)
+                ? 'text-primary-text bg-primary/5'
+                : 'text-ink hover:bg-surface-2',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <div class="px-4 pt-3">
+        <EnquireButton context="I'd like to enquire" fullWidth />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  let navAbort: AbortController | null = null;
+
+  function initNav() {
+    // Clean up previous listeners before re-initialising (e.g. after view transition)
+    navAbort?.abort();
+    navAbort = new AbortController();
+    const { signal } = navAbort;
+
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+    const menu   = header?.querySelector<HTMLElement>('[data-mobile-nav]');
+
+    if (!toggle || !menu) return;
+
+    const iconOpen  = toggle.querySelector<HTMLElement>('[data-icon-open]');
+    const iconClose = toggle.querySelector<HTMLElement>('[data-icon-close]');
+
+    function openMenu() {
+      menu!.classList.remove('hidden');
+      toggle!.setAttribute('aria-expanded', 'true');
+      toggle!.setAttribute('aria-label', 'Close navigation menu');
+      iconOpen?.classList.add('hidden');
+      iconClose?.classList.remove('hidden');
+    }
+
+    function closeMenu() {
+      menu!.classList.add('hidden');
+      toggle!.setAttribute('aria-expanded', 'false');
+      toggle!.setAttribute('aria-label', 'Open navigation menu');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+    }
+
+    toggle.addEventListener('click', () => {
+      toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
+    }, { signal });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    }, { signal });
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      if (header && !header.contains(e.target as Node)) closeMenu();
+    }, { signal });
+  }
+
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
+</script>

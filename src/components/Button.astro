@@ -1,0 +1,51 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'accent' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  fullWidth?: boolean;
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  fullWidth = false,
+  class: className,
+  type = 'button',
+} = Astro.props;
+
+const sizeClasses: Record<NonNullable<Props['size']>, string> = {
+  sm: 'px-3 py-1.5 text-sm gap-1.5',
+  md: 'px-4 py-2 text-base gap-2',
+  lg: 'px-6 py-3 text-lg gap-2.5',
+};
+
+const variantClasses: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'bg-primary text-on-primary hover:bg-primary-hover',
+  accent:  'bg-accent text-on-accent hover:bg-accent-hover',
+  outline: 'border border-line text-ink hover:border-primary hover:text-primary-text',
+  ghost:   'text-primary-text hover:bg-primary/10',
+};
+
+const baseClasses = [
+  'inline-flex items-center justify-center font-medium rounded-xl transition',
+  'hover:-translate-y-0.5 active:translate-y-0',
+  sizeClasses[size],
+  variantClasses[variant],
+  fullWidth && 'w-full',
+  className,
+];
+---
+
+{href ? (
+  <a href={href} class:list={baseClasses}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class:list={baseClasses}>
+    <slot />
+  </button>
+)}

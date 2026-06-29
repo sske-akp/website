@@ -1,0 +1,40 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  align?: 'left' | 'center';
+  as?: 'h1' | 'h2';
+}
+
+const {
+  eyebrow,
+  title,
+  intro,
+  align = 'left',
+  as = 'h2',
+} = Astro.props;
+
+// Uppercase alias for Astro dynamic element rendering
+const Tag = as as string;
+
+const alignClasses = align === 'center'
+  ? 'text-center items-center'
+  : 'text-left items-start';
+---
+
+<div class:list={['flex flex-col gap-3', alignClasses]}>
+  {eyebrow && (
+    <span class="text-xs font-semibold uppercase tracking-widest text-primary-text">
+      {eyebrow}
+    </span>
+  )}
+  <Tag class="font-display font-semibold text-3xl sm:text-4xl text-ink leading-tight">
+    {title}
+  </Tag>
+  {intro && (
+    <p class="text-muted text-lg max-w-2xl leading-relaxed">
+      {intro}
+    </p>
+  )}
+</div>
